@@ -935,12 +935,12 @@ def generateBranchObjects(config, name, secrets=None):
             if pf.get('consider_for_nightly', True):
                 buildersForNightly.append(buildername)
 
-        if config['enable_valgrind'] and \
+        '''if config['enable_valgrind'] and \
                 platform in config['valgrind_platforms']:
             builders.append('%s valgrind' % base_name)
             buildersByProduct.setdefault(
                 pf['stage_product'], []).append('%s valgrind' % base_name)
-            prettyNames["%s-valgrind" % platform] = "%s valgrind" % base_name
+            prettyNames["%s-valgrind" % platform] = "%s valgrind" % base_name'''
 
         # Check if branch wants nightly builds
         if config['enable_nightly']:
@@ -1318,7 +1318,7 @@ def generateBranchObjects(config, name, secrets=None):
         l10nSpace = config['default_l10n_space']
         clobberTime = pf.get('clobber_time', config['default_clobber_time'])
         checkTest = pf.get('enable_checktests', False)
-        valgrindCheck = pf.get('enable_valgrind_checktests', False)
+        #valgrindCheck = pf.get('enable_valgrind_checktests', False)
         # Turn pymake on by default for Windows, and off by default for
         # other platforms.
         if 'win' in platform:
@@ -1429,7 +1429,7 @@ def generateBranchObjects(config, name, secrets=None):
                     'doBuildAnalysis': doBuildAnalysis,
                     'baseName': pf['base_name'],
                     'checkTest': checkTest,
-                    'valgrindCheck': valgrindCheck,
+                    #'valgrindCheck': valgrindCheck,
                     'uploadPackages': uploadPackages,
                     'uploadSymbols': uploadSymbols,
                     'disableSymbols': disableSymbols,
@@ -1816,7 +1816,7 @@ def generateBranchObjects(config, name, secrets=None):
 
         # end do_nightly
 
-        if config['enable_valgrind'] and \
+        '''if config['enable_valgrind'] and \
                 platform in config['valgrind_platforms']:
             valgrind_env = pf['env'].copy()
             valgrind_env['REVISION'] = WithProperties("%(revision)s")
@@ -1854,7 +1854,7 @@ def generateBranchObjects(config, name, secrets=None):
                                'product': pf['stage_product'],
                                'slavebuilddir': normalizeName('%s-%s-valgrind' % (name, platform), pf['stage_product'])},
             }
-            branchObjects['builders'].append(mozilla2_valgrind_builder)
+            branchObjects['builders'].append(mozilla2_valgrind_builder)'''
 
         if platform in ('linux64',):
             if config.get('enable_blocklist_update', False) or \

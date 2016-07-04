@@ -252,10 +252,10 @@ class TestTryParser(unittest.TestCase):
         builders = [b for b in builders if 'nondefault' not in b]
         self.assertEqual(sorted(self.customBuilders), sorted(builders))
 
-    def test_ValgrindBuilds(self):
+    '''def test_ValgrindBuilds(self):
         tm = "try: -bo -p linux64-valgrind"
         self.customBuilders = TryParser(tm, VALID_BUILDER_NAMES, BUILDER_PRETTY_NAMES)
-        self.assertEquals(self.customBuilders, ["Linux x86-64 try valgrind"])
+        self.assertEquals(self.customBuilders, ["Linux x86-64 try valgrind"])'''
 
     def test_NoNondefaultTests(self):
         tm = 'try: -b d -p macosx64 -u all'

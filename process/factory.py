@@ -813,7 +813,7 @@ class MercurialBuildFactory(MozillaBuildFactory, MockMixin, TooltoolMixin):
                  stageProduct=None, post_upload_include_platform=False,
                  updatePlatform=None,
                  downloadBaseURL=None, nightly=False,
-                 checkTest=False, valgrindCheck=False,
+                 checkTest=False, #valgrindCheck=False,
                  graphServer=None, graphSelector=None, graphBranch=None,
                  baseName=None, uploadPackages=True, uploadSymbols=True,
                  updates_enabled=False, createPartial=False, doCleanup=True,
@@ -875,7 +875,7 @@ class MercurialBuildFactory(MozillaBuildFactory, MockMixin, TooltoolMixin):
         self.downloadBaseURL = downloadBaseURL
         self.nightly = nightly
         self.checkTest = checkTest
-        self.valgrindCheck = valgrindCheck
+        #self.valgrindCheck = valgrindCheck
         self.graphServer = graphServer
         self.graphSelector = graphSelector
         self.graphBranch = graphBranch
@@ -1048,8 +1048,8 @@ class MercurialBuildFactory(MozillaBuildFactory, MockMixin, TooltoolMixin):
             self.addL10nCheckTestSteps()
         if self.checkTest:
             self.addCheckTestSteps()
-        if self.valgrindCheck:
-            self.addValgrindCheckSteps()
+        #if self.valgrindCheck:
+        #    self.addValgrindCheckSteps()
         if self.updates_enabled and self.balrog_api_root:
             self.submitBalrogUpdates()
         if self.triggerBuilds:
@@ -1399,7 +1399,7 @@ class MercurialBuildFactory(MozillaBuildFactory, MockMixin, TooltoolMixin):
                      target=self.mock_target,
                      ))
 
-    def addValgrindCheckSteps(self):
+    '''def addValgrindCheckSteps(self):
         env = self.env.copy()
         env['MINIDUMP_STACKWALK'] = getPlatformMinidumpPath(self.platform)
         env['MINIDUMP_SAVE_PATH'] = WithProperties('%(basedir:-)s/minidumps')
@@ -1409,7 +1409,7 @@ class MercurialBuildFactory(MozillaBuildFactory, MockMixin, TooltoolMixin):
                      workdir="build/%s/js/src" % self.mozillaObjdir,
                      timeout=5 * 60,  # 5 minutes.
                      env=env,
-                     )
+                     )'''
 
     def addCreateUpdateSteps(self):
         self.addStep(MockCommand(
